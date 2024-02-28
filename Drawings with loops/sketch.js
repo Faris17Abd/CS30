@@ -9,6 +9,8 @@ let height = 300
 let xPos, yPos;
 function setup() {
   createCanvas(width, height);
+  xPos = []; yPos = [];
+  initWithLoops();
 }
 
 function draw() {
@@ -16,6 +18,18 @@ function draw() {
   concersAndMouse();
 }
 
+function mousePressed(){
+  xPos.push(mouseX)
+  yPos.push(mouseY)
+}
+
+
+function initWithLoops(){
+  for(let x = 10; x<width; x+=20){
+    xPos.push(x);
+    yPos.push(height/2);
+  }
+}
 function concersAndMouse(){
   //draw some circles near the four corners
   // and connect some lines from there to the mouse 
@@ -23,7 +37,7 @@ function concersAndMouse(){
   circle(width*0.05, height*0.05, 30)
   circle(width*0.95, height*0.95, 30)
   circle(width*0.05,height*0.95, 30)
-  circle(mouseX, mouseY, 10)
+  circle(mouseX, mouseY, 30)
   line(width*0.05, height *0.05, mouseX, mouseY)
   line(width*0.95, height *0.05, mouseX, mouseY)
   line(width*0.05, height *0.95, mouseX, mouseY)
