@@ -11,9 +11,8 @@ function setup() {
 
 function draw() {
   background(220);
-  squareBack();
+  fill(0,230,255);
+  square(windowWidth,windowHeight,40);
+  circle(30,30,40)
 }
 
-function squareBack(){
-  square(windowWidth, windowHeight, 40)
-} 
