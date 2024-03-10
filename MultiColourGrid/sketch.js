@@ -10,7 +10,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(0,235,255);
   fill(0,230,255);
   square(windowWidth,windowHeight,40);
   circle(30,30,40)
