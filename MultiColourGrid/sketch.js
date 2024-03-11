@@ -13,6 +13,7 @@ function setup() {
 }
 
 function draw() {
+
   
 }
 
@@ -26,3 +27,6 @@ function drawRectangles(){
   }
 
 }
+
+  
+
