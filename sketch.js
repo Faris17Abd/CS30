@@ -1,9 +1,8 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// MultiColorGrid
+// Fares Abdalla
+// 03/05/2024
+// Buildinig a grid that so happens to be multi colored.
+
 
 
 function setup() {
@@ -12,4 +11,9 @@ function setup() {
 
 function draw() {
   background(220);
+  squareBack();
 }
+
+function squareBack(){
+  square(windowWidth, windowHeight, 40)
+} 
