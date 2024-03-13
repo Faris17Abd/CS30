@@ -23,17 +23,17 @@ function keyPressed() {
 function mousePressed() {
   print (mouseButton)
   if (mouseButton === LEFT) {
-    if (squaresize < 11) {
+    if (squaresize < 1) {
       squaresize -= 0;
     } else {
-      squaresize = squaresize * 2;
+      squaresize = squaresize / 2;
     }
   }
   if (mouseButton === RIGHT) {
     if (squaresize > 399) {
       squaresize -= 0;
     } else {
-      squaresize = squaresize / 2;
+      squaresize = squaresize * 2;
     }
   }
   squareback();
