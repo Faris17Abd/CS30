@@ -7,7 +7,8 @@
 
 x = 0
 y = 0
-squaresize = 20
+squaresize = 50
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
@@ -15,16 +16,26 @@ function setup() {
 function draw() {
   background(220);
   squareback();
+  mouseClicked();
 }
 
-function squareback(){
+function mouseClicked(){
   if(mouseButton === LEFT && mouseIsPressed){
-    if(squaresize === 15){
-      squaresize = 15;
+    if(squaresize < 10){
+      squaresize -= 0;
     }else {
       squaresize -= 1;
     }
+    if(mouseButton === RIGHT && mouseIsPressed){
+      if(squaresize > 200){
+        squaresize -= 0;
+      }else {
+        squaresize += 1;
+      }
+}
   }
+}
+function squareback(){
   for(let x = 0; x < width; x += squaresize){
     for(let y = 0; y < height; y += squaresize){
       let redV = random(0,255);
