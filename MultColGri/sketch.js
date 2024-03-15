@@ -5,9 +5,14 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+let colourtime = 100;
 x = 0
 y = 0
 squaresize = 50
+let greenV;
+let redV;
+let blueV;
+let squarecolour;
 
 function setup() {
   createCanvas(400, 400);
@@ -42,12 +47,17 @@ function mousePressed() {
 function squareback() {
   for (let x = 0; x < width; x += squaresize) {
     for (let y = 0; y < height; y += squaresize) {
-      let redV = random(0, 255);
-      let greenV = random(0, 255);
-      let blueV = random(0, 255);
-      fill(redV, greenV, blueV);
-      square(x, y, squaresize);
 
+      colourtime += 1;
+      redV = noise(colourtime);
+      redV = map(redV, 0,1,0,190);
+      greenV = noise(colourtime);
+      greenV =map(greenV, 0,1,0,50);
+      blueV = noise(colourtime);
+      blueV = map(blueV, 0,1,100,0)
+      squarecolour = color(redV, greenV, blueV);
+      square(x, y, squaresize);
+      fill(squarecolour)
     }
   }
 }
