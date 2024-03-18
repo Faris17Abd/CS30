@@ -1,11 +1,9 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// MultiColourgrid
+// Fares Abdalla
+// March 15th, 2024
+// Making a grid that so happens to be multi coloured.
 
-let colourtime = 100;
+let colourtime = 100; 
 x = 0
 y = 0
 squaresize = 50
@@ -25,7 +23,9 @@ function keyPressed() {
 }
 
 
-function mousePressed() {
+function mousePressed() { 
+  //With this mousepress, if the user were to left click or right click,
+  //they will either increase the squaresize by a multiple of 2 or divide it by 2 
   print (mouseButton)
   if (mouseButton === LEFT) {
     if (squaresize < 1) {
@@ -44,7 +44,8 @@ function mousePressed() {
   squareback();
 }
 
-function squareback() {
+function squareback() { 
+  //This is the making of my square, their colour and spacing
   for (let x = 0; x < width; x += squaresize) {
     for (let y = 0; y < height; y += squaresize) {
 
