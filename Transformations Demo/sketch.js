@@ -1,115 +1,168 @@
-// Basic Transformations Sandbox
+// // Basic Transformations Sandbox
 
 
-let originalSpacing = 20;
+// let originalSpacing = 20;
 
 
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-}
+// function setup() {
+//   createCanvas(windowWidth, windowHeight);
+//   angleMode(DEGREES);
+// }
 
-function draw() {
-  background(255);
-  drawBasicGrid(220);
+// function draw() {
+//   background(220);
+//   drawStaticClock();
+//   drawclockhands();
+// }
 
-
-  //transformation one: TRANSLATION
-  // push();
-  // translate(150,50);
-  // drawBasicGrid(150);
+//   //transformation one: TRANSLATION
+//   // push();
+//   // translate(150,50);
+//   // drawBasicGrid(150);
 
  
 
-  //add push()  pop()
+//   //add push()  pop()
 
 
 
 
-  //transformation two: SCALE
-  // rectangleRed(40,0);
+//   //transformation two: SCALE
+//   // rectangleRed(40,0);
 
-  // let scaleamount = 2.5;
-  // translate(140,140);
-  // scale(scaleamount);
-  // drawBasicGrid(100);
-  // rectangleBlue(100,100);
+//   // let scaleamount = 2.5;
+//   // translate(140,140);
+//   // scale(scaleamount);
+//   // drawBasicGrid(100);
+//   // rectangleBlue(100,100);
 
 
 
-  //transformation three: ROTATION
-  //reminder: rotations are measured in radians, not degrees! Functions can help with the conversion...
-  // angleMode(DEGREES);
-  // rotate(45);
-  // translate(200,0); 
-  // drawBasicGrid(100);
-  // face(200,0);
+//   //transformation three: ROTATION
+//   //reminder: rotations are measured in radians, not degrees! Functions can help with the conversion...
+//   // angleMode(DEGREES);
+//   // rotate(45);
+//   // translate(200,0); 
+//   // drawBasicGrid(100);
+//   // face(200,0);
 
-  //Combinations of Transformations
+//   //Combinations of Transformations
 
-  circle(windowWidth/2,windowHeight/2,150);
-  let angle = 0;
-  while(angle < 45){
-    push();
-    rotate(angle);
-    line(100,650,0,700);
-    pop();
-    angle += 5;
-  }
+ 
+
+
+// function drawclockhands(){
+//   push();
+//   stroke(200,0,0);
+//   strokeWeight(1);
+//   rotate(second()*6);
+//   line(0,0,0,130);
+//   pop();
+// }
+
+// function drawStaticClock(){
+//   // Using basic transformations, draw 
+//   // an analog clock face
+//   // main circle first:
+//   stroke(0);
+//   translate(width/2, height/2);
+//   push(); //new coordinate system
+//   circle(0,0,300);
+  
+//    // all the individual ticks
+//   let count = 0; let angle = 6;
+//   while(count < 60){
+//     if(count % 5 === 0){
+//       strokeWeight(3);
+//       line(110,0,140,0);
+//      }
+//      else{
+//        strokeWeight(1);
+//        line(125,0,140,0);
+//      }
+     
+//     rotate(angle);
+//     count++;
+//    }
+//    pop();
+//  }
+
+
+
+// function drawBasicGrid(shade) {
+//   //draw the normal cartesian Coordinate Grid, in a light color. Spaced at 20 px by default
+//   stroke(shade);
+//   for (let x = 0; x < width; x += 20) {
+//     line(x, 0, x, height);
+//   }
+//   for (let y = 0; y < height; y += 20) {
+//     line(0, y, width, y);
+//   }
+
+//   //Draw "X" at the origin
+//   strokeWeight(3);
+//   stroke(0);
+//   line(-5,0,5,0);
+//   line(0,5,0,-5);
+//   strokeWeight(1);
+// }
+// An analog clock exercise
+// Mr. Scott
+// March 19 2024
+//...using basic transformations
+// 1. draw the base clock (static)
+// 2. add animated clock hands (hours, minutes, seconds)
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
 }
 
+function draw() {
+  background(220);
+  drawStaticClock();
+  drawClockHands();
+}
 
-function face(x, y) {
-  //draw a face at x,y
+function drawClockHands(){
+  //seconds hand first:
   push();
-  translate(x,y);
-  ellipseMode(CENTER);
-  fill(200,200,0);
-  stroke(0);
-  ellipse(0,0,80,80);
-  fill(90, 140, 30, 220);
-  triangle(-20, 20, 20, 20, 0, 30);
-  fill(0);
-  ellipse(-25,0,10,10);
-  ellipse(25,0,10,10);
-  strokeWeight(5);
-  line(-30,-10,30,-10);
+  stroke(200,0,0);
   strokeWeight(1);
+  rotate(second()*6);
+  line(0,0,0,130);
   pop();
+  
+  //minutes hand second:
 
+  //hour hand third:
 }
 
-function rectangleRed(x, y) {
-  //draw a red rectangle at x,y (sized 50 pixels square) - to visualize what happens to the coordinate system
-  //when different basic transformations are applied.
-  noStroke();
-  fill(255, 0, 0, 150);
-  rect(x, y, 50, 50);
 
-}
-
-function rectangleBlue(x, y) {
-  //draw a red rectangle at x,y (sized 50 pixels square) - to visualize what happens to the coordinate system
-  //when different basic transformations are applied.
-  noStroke();
-  fill(0, 0, 255, 150);
-  rect(x, y, 50, 50);
-
-}
-
-function drawBasicGrid(shade) {
-  //draw the normal cartesian Coordinate Grid, in a light color. Spaced at 20 px by default
-  stroke(shade);
-  for (let x = 0; x < width; x += 20) {
-    line(x, 0, x, height);
-  }
-  for (let y = 0; y < height; y += 20) {
-    line(0, y, width, y);
-  }
-
-  //Draw "X" at the origin
-  strokeWeight(3);
+function drawStaticClock(){
+  // Using basic transformations, draw 
+  // an analog clock face
+  // main circle first:
   stroke(0);
-  line(-5,0,5,0);
-  line(0,5,0,-5);
-  strokeWeight(1);
+  translate(width/2, height/2);
+  push(); //new coordinate system
+  circle(0,0,300);
+
+  // all the individual ticks
+  let count = 0; let angle = 6;
+  while(count < 60){
+    if(count % 5 === 0){
+      strokeWeight(3);
+      line(110,0,140,0);
+    }
+    else{
+      strokeWeight(1);
+      line(125,0,140,0);
+    }
+   
+    rotate(angle);
+    count++;
+  }
+  pop();
+  print(count);
 }
