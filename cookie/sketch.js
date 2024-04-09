@@ -13,7 +13,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(220)
   myWalker.move();
   myWalker.display();
 }
@@ -27,7 +27,7 @@ class Walker{
   display(){
     rectMode(CENTER);
     fill(this.c);
-    square(this.x, this.y, this.c);
+    square(this.x, this.y, this.size);
   }
   move(){
     let choice = Math.floor(random(4));
