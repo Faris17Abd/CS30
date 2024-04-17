@@ -23,5 +23,6 @@ function drawroad(){
     fill(255)
     rect(i*50, height/2 - 10, 30, 20);
   fill( )
+  
 }
 }
