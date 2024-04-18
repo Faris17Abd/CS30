@@ -8,12 +8,13 @@
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  drawroad();
+  background(220);
 }
 
 function draw() {
-  drawroad();
+ 
 }
-
 
 function drawroad(){
   fill(0)
@@ -22,7 +23,7 @@ function drawroad(){
   for (let i = 0; i < width; i++) {
     fill(255)
     rect(i*50, height/2 - 10, 30, 20);
-  fill( )
-  
+  fill(135, 128, 128);
+  rect(width,height,width, height)
 }
 }
