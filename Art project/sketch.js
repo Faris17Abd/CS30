@@ -17,7 +17,8 @@ function setup() {
 
 
 function drawingtheSinsiods(){
-  // This function loops so that the there will be spaces between each line
+  // The `drawSinusiods() function draws several sinusoidal waves 
+  //with increasing amplitudes after repeatedly changing the peak and spacesBetween values
   for(let i = 100; i >= 0; i--){
     period - 0.1;
     peak += 4;
