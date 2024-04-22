@@ -12,6 +12,7 @@ let spacesBetween = 150;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleModes(DEGREES);
+  drawingtheSinsiods();
   drawSinewaves();
 }
 
@@ -22,7 +23,8 @@ function drawingtheSinsiods(){
   for(let i = 100; i >= 0; i--){
     period - 0.1;
     peak += 4;
-    trough += 4;
+    spacesBetween += 4;
+    drawSinewaves();
   }
 }
 
