@@ -11,9 +11,10 @@ let spacesBetween = 150;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  angleModes(DEGREES);
-  drawingtheSinsiods();
+  angleMode(DEGREES);
   drawSinewaves();
+  drawingtheSinsiods();
+  
 }
 
 
@@ -21,7 +22,7 @@ function drawingtheSinsiods(){
   // The `drawSinusiods() function draws several sinusoidal waves 
   //with increasing amplitudes after repeatedly changing the peak and spacesBetween values
   for(let i = 100; i >= 0; i--){
-    period - 0.1;
+    period = 0.1;
     peak += 4;
     spacesBetween += 4;
     drawSinewaves();
