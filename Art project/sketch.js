@@ -1,9 +1,7 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// Art Replication
+// Fares Abdalla
+// 21/04/2024
+// “Ninety Parallel Sinusoids With Linearly Increasing Period”
 
 let period = 0.1;
 let peak = 110;
