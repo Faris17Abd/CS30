@@ -21,11 +21,11 @@ function draw() {
 
 function drawroad(){
 
-  fill(218, 214, 214);
+  fill(223);
   square(-1,-1,45454)
 
-  fill(135, 128, 128);
-  square(-1,-1,width)
+  // fill(135, 128, 128);
+  // square(-1,-1,width)
   fill(0)
   rect(0,height/2, width, 200);
   rect(0,height/2 - 200, width, 200);
