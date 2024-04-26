@@ -34,3 +34,8 @@ function drawroad(){
     rect(i*50, height/2 - 10, 30, 20);
 }
 }
+
+class colon3{
+  constructor(x,y)
+    
+}
