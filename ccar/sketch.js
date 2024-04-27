@@ -44,9 +44,9 @@ class colon3{
     else{
       this.y = random(height / 2 + 5, height - height / 4 - 15);
     }
-    this.direction_of_car = y;
-    this.speed_of_car = 5
-    this.colour_of_car = color(random(255),random(255), random (255));
+    this.direction_of_vehicle = y;
+    this.speed_of_vehicle = 5
+    this.colour_of_vehicle = color(random(255),random(255), random (255));
     this.Type_of_vehicle = Math.floor(random(0,2));
     this.The_World = 0;
   }  
@@ -69,4 +69,39 @@ class colon3{
     rect(this.x + 19.3, this.y  + 15, 10, 5);
     rect(this.x, this.y + 15, 10, 5);
   }
+
+  truck(){
+    fill(this.color);
+    rect(this.x, this.y, 30, 20);
+    fill(200, 230, 255);
+    rect(this.x + 20, this.y, 10, 19.5);
+  }
+
+  move(){
+    if(this.direction_of_vehicle === 1){
+      this.x += this.speed_of_vehicle;
+      if(this.x>width) this.x=0;
+    }
+    else if(this.direction_of_vehicle === 0){
+      this.x -= this.speed_of_vehicle;
+      if(this.x<0) this.x = width;
+    }
+  }
+
+  speed_up(){
+    this.speed_of_vehicle += 1;
+    if(this.speed_of_vehicle>15) this.speed_of_vehicle=15;
+  }
+
+  speed_down(){
+    this.speed_of_vehicle -= 1;
+    if(this.speed_of_vehicle) this.speed_of_vehicle = 15;
+  }
+
+  colour_change(){
+    this.colour_of_vehicle = color(random(255), random(255), random(255));
+    fill(this.colour_of_vehicle);
+  }
+
+  
 }
