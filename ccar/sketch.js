@@ -42,7 +42,8 @@ function draw() {
 
 function drawroad(){
 
-  
+  fill(190)
+  square(-1,-1,454545);
 
   noStroke();
   fill(0)
@@ -50,7 +51,7 @@ function drawroad(){
   rect(0,height/2 , width, 200);
   for (let i = 0; i < width; i++) {
     fill("yellow")
-    rect(i*50, height/2 - 12, 30, 5);
+    rect(i*50, height/2 + 2, 30, 5);
 }
 }
 
