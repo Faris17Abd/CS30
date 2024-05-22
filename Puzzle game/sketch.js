@@ -1,67 +1,125 @@
-// Puzzle Game Starter
+// puzzle game
 // Fares Abdalla
-// April 23, 2024
+// May 20th, 2024
 
-let grid =
-[ [0,    255,    0,  255,   0],
-  [0,      0,  255,    0,   0],
-  [0,    255,  255,    0,  255],
-  [0,    255,  255,    0,  255],
-  [0,    255,  255,    0,  255],
-  [0,    255,  255,    0,  255],
-  [0,    255,  255,    0,  255],
-  [255,  255,    0,  255,  255]
-];
 
-let squareSize = 50;
-const NUM_ROWS = 5; const NUM_COLS = 5;
+let numsrows = 4;
+let numscols = 5;
+let rectWidth, rectHeight;
+let griddata = [[]];
+let won = [false];
+let mousepostion = [];
 
-let row, col;
 
 function setup() {
-  createCanvas(NUM_COLS * squareSize, NUM_ROWS * squareSize);
+  //Determining a size for each square
+  createCanvas(400, 400);
+  rectWidth = width/numscols;
+  rectHeight = height/numsrows;
+  // adding entries to the griddata array
+  fillgridata();
 }
 
 function draw() {
-  col = getCurrentX();
-  row = getCurrentY();  print(col, row);
+  if(won[0]){
+    drawgrid(false);
+    fill(won[1]);
+    textAlign(CENTER);
+    textSize(50);
+    text("You Win!", width/2, height/2);
+    noLoop();
+    return;
+  }
   background(220);
-  drawGrid();
+  activesquare(); //determine the tile that the mouse cursor is over.
+  drawgrid();  //display the game board that is currently in use (along with the overlay)
+}
+
+function fillgridata(){
+  for(let i = 0; i < numsrows; i++){
+    griddata[i] = [];
+    for(let j = 0; j<numscols; j++){
+      griddata[i][j] = (round(random(0,2)) == 0); //Checking to see if it is true or false
+    }
+  }
 }
 
 function mousePressed(){
-  flip(col, row);
-  flip();
-}
-
-function flip(x,y){
-  if(grid[y][x]===0) grid[y][x]=255;
-  else grid[y][x] = 0;
-}
-
-function getCurrentY(){
-  //determine current row of mouse, and return
-  let constrainY = constrain(mouseY, 0, height-1);
-  return int(constrainY/squareSize);
-}
-
-function getCurrentX(){
-  //determine the current column of the mouse, and return
-  let constrainX = constrain(mouseX, 0, width-1);
-  return int(constrainX/squareSize);
-}
-
-function drawGrid(){
-  // Read data from our 2D Array (grid), and use the 
-  // numbers there to set the color for squares which are
-  // arranged in a grid fashion.
-  for(let y = 0; y<NUM_ROWS; y++){
-    for(let x = 0; x<NUM_COLS; x++){
-      let fillValue = grid[y][x];
-      fill(fillValue);
-      //             x:   0 ,   1,     2,    3,     4  
-      //squareSize*x:     0     50    100    150    200
-      square(x*squareSize, y*squareSize, squareSize);
-    }  
+  // A mouse click causes the cross-shaped pattern to flip.
+  // The flip function verifies boundary constraints to 
+  // guarantee in-bounds access for the array.
+  if(won[0]) return;
+  flip(mousepostion[0][1], mousepostion[0][0]);
+  
+  if((!keyIsPressed===true)){
+    for(let i of mousePressed.slice(1)){
+      flip(i[1], i[0]);
+    }
   }
+  //The only tile that will flip if shift is pressed and the mouse 
+  //is clicked is the current tile.
+  else if(key === SHIFT){
+    flip(row, col);
+  }
+  if(checkForWin()) won[0]=true
+}
+
+function flip(col,row){
+//Flip the value of a given column and row for a 2D array from 0 to 255 or 255 to 0. 
+//The conditions make sure that the provided column and row exist and are valid for the array.
+// If not, there are no operations.
+
+
+  if(checkValid(row,col)){
+    griddata[col][row] = ! griddata[col][row];
+  }
+}
+
+function activesquare(){
+   // An expression to run each frame to determine where the mouse currently is.
+  mousepostion = [];
+  let x,y;
+  x = int(mouseX/ rectWidth);
+  y = int(mouseY/rectHeight);
+  mousepostion.push([x,y]);
+
+  if(checkValid(x-1, y))mousepostion.push([x-1,y]);
+  if(checkValid(x+1, y))mousepostion.push([x+1,y]);
+  if(checkValid(x, y-1))mousepostion.push([x,y-1]);
+  if(checkValid(x, y+1))mousepostion.push([x,y+1]);
+}
+
+function drawgrid(){
+  //Create a square grid by filling it with a color based on the data stored in the 2D array.
+
+  for (let x = 0; x < numscols; x++){
+    for(let y = 0; y < numsrows; y++){
+      if(griddata[y][x] ===  true) fill(0);
+      else fill(255);
+      rect(x*rectWidth, y*rectHeight, rectWidth, rectHeight);
+    }
+  }
+  fill(0, 155,0,100);
+  for(let i of mousepostion){
+    rect(i[0]*rectWidth, i[1]*rectHeight, rectWidth, rectHeight);
+  }
+}
+
+function checkForWin(){
+  // checking if all of the items in griddata are the same
+  let first = griddata[0][0];
+  for(let i = 0; i < numsrows; i++)
+    for(let j = 0; j < numscols; j++)
+      if(griddata[i][j] !==first) return false;
+  
+  won[1] = first?255:0;
+  return true;
+}
+
+function checkValid(x,y){
+  // checking if in bounds
+  if(x >= 0 && x <= numsrows && y >= 0 && y <= numscols){
+    return true;
+  }
+  else return false;
 }
