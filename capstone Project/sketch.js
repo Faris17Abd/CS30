@@ -55,8 +55,8 @@ function Tetris_Grid_drawing_outline(){
 }
 
 function The_blocks(){
-  let blxs = Math.floor(random(0,7));
-  if (blxs === 0) {
-    
+  let blxs = Math.floor(random(1,8));
+  if (blxs === 1) {
+    fill(0,128,255)
   }
 }
