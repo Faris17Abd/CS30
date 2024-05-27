@@ -33,3 +33,13 @@ function setup() {
 function draw() {
   background(220);
 }
+
+function renderBoard(){
+  for(let x = 0; x<COLUMNS; x++){
+    for(let y = 0; y<ROWS; y++){
+      let type = level[y][x]
+      let currentImage = tiles[type];
+      image(currentImage, x * TITLE_SIZE)
+    }
+  }
+}

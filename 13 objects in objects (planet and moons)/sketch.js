@@ -39,6 +39,9 @@ class planet{
     this.x= x; this.y= y; this.s = 100;
     this.moons = [];
   }
+  relocate(){
+    
+  }
   createMoon(){
     this.moons.push(new moon(this.x,this.y));
   }
