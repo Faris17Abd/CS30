@@ -21,16 +21,15 @@ let tetris_outline = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  [7, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [7, 0, 0, 0, 0, 0, 0, 0, 0, 5],
+  [7, 6, 0, 0, 0, 0, 2, 5, 5, 5],
+  [7, 6, 0, 3, 1, 1, 2, 2, 4, 4],
+  [6, 6, 3, 3, 3, 1, 1, 2, 4, 4]
 ]
 
 let squareSize = 20;
-const NUM_ROWS = 11; const NUM_COLS = 21;
+const NUM_ROWS = 20; const NUM_COLS = 10;
 
 let row, col;
 
@@ -40,16 +39,44 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  
   Tetris_Grid_drawing_outline();
 }
 
 function Tetris_Grid_drawing_outline(){
 
-  for(let y = 1; y<NUM_COLS; y++){
-    for(let x = 1; x<NUM_ROWS; x++){
+  for(let y = 0; y<NUM_ROWS; y++){
+    for(let x =0 ; x<NUM_COLS; x++){
       rectMode(CORNER);
-      rect(x*squareSize, y*squareSize, squareSize);
+      let type = tetris_outline[y][x]
+      if(type === 0){
+        fill(255);
+      }
+      else if(type === 1){
+        fill(255, 0, 0);
+      }
+      else if(type === 2){
+        fill(0, 255, 0);
+      }
+      else if(type === 3){
+        fill(127,0,255);
+      }
+      else if(type === 4){
+        fill(255,255,0);
+      }
+      else if(type === 5){
+        fill(255,128,0);
+      }
+      else if(type === 6){
+        fill(0,102,204);
+      }
+      else if(type === 7){
+        fill(51,255,255);
+      }
+
+      
+      
+      rect(x*squareSize + 200 , y*squareSize + 200, squareSize);
     }  
   }
 }
