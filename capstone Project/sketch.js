@@ -28,7 +28,7 @@ let tetris_outline = [
   [6, 6, 3, 3, 3, 1, 1, 2, 4, 4]
 ]
 
-let squareSize = 20;
+let squareSize = 25;
 const NUM_ROWS = 20; const NUM_COLS = 10;
 
 let row, col;
@@ -73,17 +73,14 @@ function Tetris_Grid_drawing_outline(){
       else if(type === 7){
         fill(51,255,255);
       }
-
-      
-      
       rect(x*squareSize + 200 , y*squareSize + 200, squareSize);
     }  
   }
 }
 
 function The_blocks(){
-  let blxs = Math.floor(random(1,8));
-  if (blxs === 1) {
-    fill(0,128,255)
-  }
+  let blocks = []
+    [[1, 1, 0],
+     [0, 1, 1]
+    ]
 }
