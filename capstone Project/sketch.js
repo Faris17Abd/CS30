@@ -27,7 +27,28 @@ let tetris_outline = [
   [7, 6, 0, 3, 1, 1, 2, 2, 4, 4],
   [6, 6, 3, 3, 3, 1, 1, 2, 4, 4]
 ]
-
+let blocks = []
+let zigzag = [
+  [[1, 1, 0], 
+   [0, 1, 1],
+   [0, 0, 0]
+ ],
+ [[0, 0, 1],
+  [0, 1, 1],
+  [0, 1, 0]
+ ],
+ [[1, 1, 0],
+  [0, 1, 1],
+  [0, 0, 0]
+ ],
+ [[0, 1, 0],
+  [1, 1, 0],
+  [1, 0, 0]
+ ]
+]
+blocks.push(zigzag) 
+let blockx;
+let blocky; 
 let squareSize = 25;
 const NUM_ROWS = 20; const NUM_COLS = 10;
 
@@ -78,9 +99,3 @@ function Tetris_Grid_drawing_outline(){
   }
 }
 
-function The_blocks(){
-  let blocks = []
-    [[1, 1, 0],
-     [0, 1, 1]
-    ]
-}
