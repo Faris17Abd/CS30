@@ -21,11 +21,11 @@ let tetris_outline = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [7, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [7, 0, 0, 0, 0, 0, 0, 0, 0, 5],
-  [7, 6, 0, 0, 0, 0, 2, 5, 5, 5],
-  [7, 6, 0, 3, 1, 1, 2, 2, 4, 4],
-  [6, 6, 3, 3, 3, 1, 1, 2, 4, 4]
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 let blocks = []
 let zigzag = [
@@ -154,6 +154,9 @@ blocks.push(Tshape);
 blocks.push(Deathnotereference);
 blocks.push(reversedeathnoterefernce);
 blocks.push(Longblock);
+
+let currentblock;
+let blockrotation;
 let blockx;
 let blocky; 
 let squareSize = 25;
@@ -166,11 +169,14 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 }
 
-function draw() {
+function draw() { 
   
   Tetris_Grid_drawing_outline();
 }
 
+function placingblock(){
+
+}
 function Tetris_Grid_drawing_outline(){
 
   for(let y = 0; y<NUM_ROWS; y++){
