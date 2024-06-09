@@ -159,6 +159,7 @@ let currentblock;
 let blockrotation;
 let blockx;
 let blocky; 
+let Gameover = false;
 let squareSize = 25;
 const NUM_ROWS = 20; const NUM_COLS = 10;
 
@@ -175,7 +176,7 @@ function draw() {
 }
 
 function placingblock(){
-  
+
 }
 function Tetris_Grid_drawing_outline(){
 
@@ -210,5 +211,20 @@ function Tetris_Grid_drawing_outline(){
       rect(x*squareSize + 200 , y*squareSize + 200, squareSize);
     }  
   }
+}
+
+function isitcolliding(x, y, block){
+  for(let i = 0; i < block.length; i++){ // goes through each row of the block
+    for(let j = 0; i < block[i].length; j++) // goes through each colum of current row
+      if(block.length[i][j] !== 0){ // Checks if the current cell is part of the block
+        let newx = x + j;
+        let newy = y + i;
+        // Bottom line checks if the tetrominoes are colliding with anything
+        if(newx < 0 || newx >= NUM_COLS || newy >= NUM_ROWS || newy >= 0 && Tetris_Grid_drawing_outline[newy][newx] !== 0){
+          return true;
+        }
+      }
+  }
+  return false
 }
 
