@@ -175,7 +175,7 @@ function draw() {
 }
 
 function placingblock(){
-
+  
 }
 function Tetris_Grid_drawing_outline(){
 
