@@ -178,12 +178,19 @@ function draw() {
 function placingblock(){
 
 }
+
+function draw_current_block () {
+  
+}
+
+
 function Tetris_Grid_drawing_outline(){
 
   for(let y = 0; y<NUM_ROWS; y++){
     for(let x =0 ; x<NUM_COLS; x++){
       rectMode(CORNER);
       let type = tetris_outline[y][x]
+      fill(getColor(type));
       rect(x*squareSize + 200 , y*squareSize + 200, squareSize);
     }  
   }
