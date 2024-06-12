@@ -176,7 +176,14 @@ function draw() {
 }
 
 function placingblock(){
-
+  let blocktype = random(blocks);
+  currentblock = blocktype;
+  blockrotation = 0
+  blockx = 3
+  blocky = 0
+  if(isitcolliding(blockx, blocky, currentblock[blockrotation])){
+  Gameover = true; 
+ }
 }
 
 function draw_current_block () {
