@@ -168,6 +168,7 @@ let row, col;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  frameRate(60);
 }
 
 function draw() { 
@@ -235,6 +236,27 @@ function getColor(type){ // this makes it easier to access the colors
    else if (type === 7) {
     return color(51, 255, 255);
   }
+}
+
+function blockmovement(){
+  if(keyIsDown(LEFT_ARROW)){
+    if(!isitcolliding(blockx - 1, blocky, currentblock[blockrotation])){
+      blockx--;
+    }
+  }
+  if(keyIsDown(RIGHT_ARROW)){
+    if(!isitcolliding(blockx + 1, blocky, currentblock[blockrotation]));
+    blockx++;
+  }
+  if(keyIsDown(DOWN_ARROW)){
+    if(!isitcolliding(blockx, blocky + 1, currentblock[blockrotation])){
+      blocky++;
+    }
+  }
+}
+
+function keyPressed(){
+  if(key)
 }
 function isitcolliding(x, y, block){
   for(let i = 0; i < block.length; i++){ // goes through each row of the block
