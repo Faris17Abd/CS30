@@ -180,7 +180,13 @@ function placingblock(){
 }
 
 function draw_current_block () {
-  
+  for(y < 0; y < currentblock[blockrotation].length; y++){
+    for(x < 0; x < currentblock[blockrotation][y]; x++){
+      if(currentblock[blockrotation[y][x]])
+        fill(getColor(type));
+        rect((block + x) + squareSize + 200, (block + y) *squareSize + 200, squareSize);
+  }
+ }     
 }
 
 
