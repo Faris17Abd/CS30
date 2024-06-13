@@ -256,7 +256,14 @@ function blockmovement(){
 }
 
 function keyPressed(){
-  if(key)
+  if(keyCode === UP_ARROW){
+    let nextrotation = (currentRotation + 1) % blockrotation.length;
+    if(!isitcolliding(blockx, blocky, currentblock[blockrotation])) {
+      currentblock = nextrotation;
+    }
+  }
+
+  
 }
 function isitcolliding(x, y, block){
   for(let i = 0; i < block.length; i++){ // goes through each row of the block
