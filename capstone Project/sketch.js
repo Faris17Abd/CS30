@@ -119,9 +119,9 @@ let reversedeathnoterefernce = [
    [6, 6, 6],
    [0, 0, 6]
   ],
-  [[6, 6, 0],
+  [[0, 6, 0],
    [0, 6, 0],
-   [0, 6, 0]
+   [6, 6, 0]
   ]
 ]
 let Longblock = [
@@ -161,13 +161,15 @@ let blockx, blocky;
 let Gameover = false;
 let squareSize = 25;
 const NUM_ROWS = 20; const NUM_COLS = 10;
-let row, col;
 const moveInterval = 30
 let horizontalMoveTimer = 0;
 const horizontalMoveInterval = 5;
 let collisionDelayTimer = 0;
 const collisionDelay = 30;
 let isCollidingFlag = false;
+let holdblock = false;
+let heldblock = [[0]];
+let canhold = true;
 
 
 function setup() {
@@ -214,6 +216,18 @@ function draw_current_block() {
   }
 }
 
+function Holdingblocks(){
+  if(holdblock && heldblock[0][0] !== 0){
+    for(let y = 0; y < heldblock[0].length; y++){
+      for(let x = 0; x < heldblock[0][y].length; x++){
+        if(heldblock[0][y][x] !== 0){
+          fill(getColor(heldblock[0][y][x]));
+          rect(x * squareSize + 50, y * squareSize + 50, squareSize, squareSize);
+        }
+      }
+    }
+  }
+}
 
 function Tetris_Grid_drawing_outline(){
 
