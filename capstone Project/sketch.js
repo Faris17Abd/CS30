@@ -1,9 +1,4 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+
 
 let tetris_outline = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -161,7 +156,7 @@ let blockx, blocky;
 let Gameover = false;
 let squareSize = 25;
 const NUM_ROWS = 20; const NUM_COLS = 10;
-const moveInterval = 30
+let moveInterval = 30
 let horizontalMoveTimer = 0;
 const horizontalMoveInterval = 5;
 let collisionDelayTimer = 0;
@@ -171,10 +166,14 @@ let holdblock = false;
 let heldblock = [[0]];
 let canhold = true;
 
+let nextBlocks = [];
+const NEXT_BLOCKS_COUNT = 4;
+let level = 1;
+let linesCleared = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  placingblock();
+  initializeGame();
   frameRate(60);
 }
 
@@ -187,19 +186,67 @@ function draw() {
     blockmovement();
     Tetris_Grid_drawing_outline();
     draw_current_block();
+    drawNextBlocks();
+    Holdingblocks();
+    drawHUD();
   } else {
     textSize(32);
     fill(0);
     text('Game over', width/2 - 80, height/2);
+    textSize(24);
+    text("Lines cleared: " + linesCleared, width/2 - 80, height/2 + 40);
+    text('Press R to restart', width/2 - 80, height/2 + 80);
   }
 }
 
-function placingblock(){
-  let blocktype = random(blocks);
-  currentblock = blocktype;
-  blockrotation = 0
-  blockx = 3
-  blocky = 0
+function initializeGame() {
+  tetris_outline = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+  currentblock = random(blocks);
+  nextBlocks = [];
+    for (let i = 0; i < 4; i++) {
+      let blockType = random(blocks);
+      nextBlocks.push(blockType);
+    }
+  blockrotation = 0;
+  blockx = 3;
+  blocky = 0;
+  Gameover = false;
+  holdblock = false;
+  heldblock = [[0]];
+  canhold = true;
+  level = 1;
+  linesCleared = 0;
+  moveInterval = 30;
+}
+
+function placingblock() {
+  currentblock = nextBlocks.shift();
+  nextBlocks.push(random(blocks));
+  blockrotation = 0;
+  blockx = 3;
+  blocky = 0;
+  canhold = true;
   if(isitcolliding(blockx, blocky, currentblock[blockrotation])){
     Gameover = true; 
  }
@@ -211,6 +258,20 @@ function draw_current_block() {
       if (currentblock[blockrotation][y][x] !== 0) {
         fill(getColor(currentblock[blockrotation][y][x]));
         rect((blockx + x) * squareSize + 200, (blocky + y) * squareSize + 200, squareSize, squareSize);
+      }
+    }
+  }
+}
+
+function drawNextBlocks() {
+  for (let i = 0; i < NEXT_BLOCKS_COUNT; i++) {
+    let nextBlock = nextBlocks[i];
+    for (let y = 0; y < nextBlock[0].length; y++) {
+      for (let x = 0; x < nextBlock[0][y].length; x++) {
+        if (nextBlock[0][y][x] !== 0) {
+          fill(getColor(nextBlock[0][y][x]));
+          rect((x + NUM_COLS + 2) * squareSize + 200, (y + i * 4) * squareSize + 200, squareSize, squareSize);
+        }
       }
     }
   }
@@ -230,7 +291,6 @@ function Holdingblocks(){
 }
 
 function Tetris_Grid_drawing_outline(){
-
   for(let y = 0; y<NUM_ROWS; y++){
     for(let x =0 ; x<NUM_COLS; x++){
       rectMode(CORNER);
@@ -241,8 +301,14 @@ function Tetris_Grid_drawing_outline(){
   }
 }
 
+function drawHUD() {
+  textSize(16);
+  fill(0);
+  text("Level: " + level, 200 + NUM_COLS * squareSize + 70, 160);
+  text("Lines: " + linesCleared, 200 + NUM_COLS * squareSize + 70, 180);
+}
 
-function getColor(type){ // this makes it easier to access the colors
+function getColor(type){ 
   if (type === 0) {
     return color(255);
   } 
@@ -308,7 +374,24 @@ function keyPressed(){
     isCollidingFlag = false;
   }
   if(keyCode === 67){
-    
+    if(canhold === true){
+      if(holdblock === true){
+        let temp = currentblock;
+        currentblock = heldblock;
+        heldblock = temp;
+        blockrotation = 0;
+        blockx = 3;
+        blocky = 0;
+      } else{
+        heldblock = currentblock;
+        placingblock();
+      }
+      holdblock = true;
+      canhold = false;
+    }
+  }
+  if (keyCode === 82 && Gameover) { // R key to restart
+    initializeGame();
   }
 }
 
@@ -317,7 +400,7 @@ function gettingblocksdown(){
     blocky++;
     isCollidingFlag = false;
   } else{
-    if(!isCollidingFlag === false){
+    if(isCollidingFlag === false){
       collisionDelayTimer = frameCount;
       isCollidingFlag = true;
     }
@@ -359,6 +442,11 @@ function clearline(){
         tetris_outline[0][col] = 0;
       }
       y++;
+      linesCleared++;
+      if (linesCleared >= level * 10) {
+        level++;
+        moveInterval = max(5, moveInterval - 2);
+      }
     }
   }
 }
@@ -377,4 +465,3 @@ function isitcolliding(blockx, blocky, block) {
   }
   return false;
 }
-
