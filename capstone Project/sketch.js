@@ -307,7 +307,9 @@ function keyPressed(){
     placingblock();
     isCollidingFlag = false;
   }
-  
+  if(keyCode === 67){
+    
+  }
 }
 
 function gettingblocksdown(){
@@ -315,7 +317,7 @@ function gettingblocksdown(){
     blocky++;
     isCollidingFlag = false;
   } else{
-    if(!isCollidingFlag){
+    if(!isCollidingFlag === false){
       collisionDelayTimer = frameCount;
       isCollidingFlag = true;
     }
@@ -342,20 +344,21 @@ function clearline(){
   for(let y = NUM_ROWS - 1; y >= 0; y--){
     let islinefull = true;
     for(let x = 0; x < NUM_COLS; x++){
-      if(tetris_outline[y][x] === 0);
-      islinefull = false;
-      break
+      if(tetris_outline[y][x] === 0){
+        islinefull = false;
+        break; 
+      }
     }
-    if(islinefull){
-      for(let row = y; row >= 0; row--){
-        for(let col = x; col >= 0; col++){
-          tetris_outline[row][col] = tetris_outline[row-1][col];
-        }
-        }
+    if(islinefull === true){
+      for(let row = y; row > 0; row--){
         for(let col = 0; col < NUM_COLS; col++){
-          tetris_outline[0][col] = 0;
+          tetris_outline[row][col] = tetris_outline[row - 1][col];
         }
-        y++;
+      }
+      for(let col = 0; col < NUM_COLS; col++){
+        tetris_outline[0][col] = 0;
+      }
+      y++;
     }
   }
 }
