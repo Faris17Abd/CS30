@@ -1,6 +1,9 @@
+// final project
+// june 21 2024
+// fares abdalla
+//tetris single and multiplayer
 
-
-let tetris_outline = [
+let tetris_outline = [    // the tetris grid
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -22,8 +25,8 @@ let tetris_outline = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
-let blocks = []
-let zigzag = [
+let blocks = [] 
+let zigzag = [ // our blocks
   [[1, 1, 0], 
    [0, 1, 1],
    [0, 0, 0]
@@ -157,7 +160,7 @@ let Gameover = false;
 let squareSize = 25;
 const NUM_ROWS = 20; const NUM_COLS = 10;
 let moveInterval = 30
-let horizontalMoveTimer = 0;
+let horizontalMoveTimer = 0; // these time related ones work with the timing of the blocks after they come into connections with another block
 const horizontalMoveInterval = 5;
 let collisionDelayTimer = 0;
 const collisionDelay = 30;
@@ -190,7 +193,7 @@ function draw() {
     Holdingblocks();
     drawHUD();
   } else {
-    textSize(32);
+    textSize(32); // info for when you lose
     fill(0);
     text('Game over', width/2 - 80, height/2);
     textSize(24);
@@ -199,7 +202,7 @@ function draw() {
   }
 }
 
-function initializeGame() {
+function initializeGame() { // this coding starts the game
   tetris_outline = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -240,7 +243,7 @@ function initializeGame() {
   moveInterval = 30;
 }
 
-function placingblock() {
+function placingblock() { // places blocks in the block array
   currentblock = nextBlocks.shift();
   nextBlocks.push(random(blocks));
   blockrotation = 0;
@@ -252,7 +255,7 @@ function placingblock() {
  }
 }
 
-function draw_current_block() {
+function draw_current_block() { // draws the block within the block array
   for (let y = 0; y < currentblock[blockrotation].length; y++) {
     for (let x = 0; x < currentblock[blockrotation][y].length; x++) {
       if (currentblock[blockrotation][y][x] !== 0) {
@@ -263,7 +266,7 @@ function draw_current_block() {
   }
 }
 
-function drawNextBlocks() {
+function drawNextBlocks() { // this draws the blocks in next to the tetris grid
   for (let i = 0; i < NEXT_BLOCKS_COUNT; i++) {
     let nextBlock = nextBlocks[i];
     for (let y = 0; y < nextBlock[0].length; y++) {
@@ -277,7 +280,7 @@ function drawNextBlocks() {
   }
 }
 
-function Holdingblocks(){
+function Holdingblocks(){ // a function to hold blocks
   if(holdblock && heldblock[0][0] !== 0){
     for(let y = 0; y < heldblock[0].length; y++){
       for(let x = 0; x < heldblock[0][y].length; x++){
@@ -290,7 +293,7 @@ function Holdingblocks(){
   }
 }
 
-function Tetris_Grid_drawing_outline(){
+function Tetris_Grid_drawing_outline(){ // the grid
   for(let y = 0; y<NUM_ROWS; y++){
     for(let x =0 ; x<NUM_COLS; x++){
       rectMode(CORNER);
@@ -301,14 +304,14 @@ function Tetris_Grid_drawing_outline(){
   }
 }
 
-function drawHUD() {
+function drawHUD() { // the hud for game info
   textSize(16);
   fill(0);
   text("Level: " + level, 200 + NUM_COLS * squareSize + 70, 160);
   text("Lines: " + linesCleared, 200 + NUM_COLS * squareSize + 70, 180);
 }
 
-function getColor(type){ 
+function getColor(type){ // the colors. making this a function makes it easier to use
   if (type === 0) {
     return color(255);
   } 
@@ -335,8 +338,8 @@ function getColor(type){
   }
 }
 
-function blockmovement(){
-  if(frameCount - horizontalMoveTimer > horizontalMoveInterval){ 
+function blockmovement(){ // this is the movement
+  if(frameCount - horizontalMoveTimer > horizontalMoveInterval){  // this is a timer from when it collidies
     if(keyIsDown(LEFT_ARROW)){
       if(!isitcolliding(blockx - 1, blocky, currentblock[blockrotation])){
         blockx--;
@@ -358,7 +361,7 @@ function blockmovement(){
 }
 
 function keyPressed(){
-  if(keyCode === UP_ARROW){
+  if(keyCode === UP_ARROW){ // rotates
     let nextrotation = (blockrotation + 1) % currentblock.length;
     if(!isitcolliding(blockx, blocky, currentblock[nextrotation])) {
       blockrotation = nextrotation;
@@ -366,14 +369,14 @@ function keyPressed(){
   }
   if(keyCode === 32){
     while(!isitcolliding(blockx, blocky + 1, currentblock[blockrotation])){
-      blocky++;
+      blocky++; // istant drop
     }
     mergingthemblocks();
     clearline();
     placingblock();
     isCollidingFlag = false;
   }
-  if(keyCode === 67){
+  if(keyCode === 67){ // holds the blocks
     if(canhold === true){
       if(holdblock === true){
         let temp = currentblock;
@@ -390,12 +393,12 @@ function keyPressed(){
       canhold = false;
     }
   }
-  if (keyCode === 82 && Gameover) { // R key to restart
+  if (keyCode === 82 && Gameover) { //restarts
     initializeGame();
   }
 }
 
-function gettingblocksdown(){
+function gettingblocksdown(){ // this function allows blocks to go down 
   if(!isitcolliding(blockx,blocky + 1,currentblock[blockrotation])){
     blocky++;
     isCollidingFlag = false;
@@ -413,7 +416,7 @@ function gettingblocksdown(){
   }
 }
 
-function mergingthemblocks(){
+function mergingthemblocks(){ // corrects the blocks within the array
   for(let y = 0; y < currentblock[blockrotation].length; y++){
     for(let x = 0; x < currentblock[blockrotation][y].length; x++){
       if(currentblock[blockrotation][y][x] !== 0){
@@ -423,7 +426,7 @@ function mergingthemblocks(){
   }
 }
 
-function clearline(){
+function clearline(){ // clears lines
   for(let y = NUM_ROWS - 1; y >= 0; y--){
     let islinefull = true;
     for(let x = 0; x < NUM_COLS; x++){
@@ -451,7 +454,7 @@ function clearline(){
   }
 }
 
-function isitcolliding(blockx, blocky, block) {
+function isitcolliding(blockx, blocky, block) { // checks if anything colliding
   for (let y = 0; y < block.length; y++) {
     for (let x = 0; x < block[y].length; x++) { 
       if (block[y][x] !== 0) {

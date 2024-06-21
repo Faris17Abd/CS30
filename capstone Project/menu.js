@@ -4,4 +4,5 @@ function setup(){
 
 function draw(){
     background(220)
+    //didn't have time for this + too stressed about the test
 }

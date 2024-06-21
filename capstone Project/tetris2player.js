@@ -1,3 +1,5 @@
+// everything here is basically the same as the first tetris game, however just now accesible for two player
+
 let tetris_outline = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

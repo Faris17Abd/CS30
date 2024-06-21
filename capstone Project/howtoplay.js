@@ -1,8 +1,8 @@
 function setup(){
     createCanvas(windowWidth, windowHeight);
 }
-
-function draw(){
+ 
+function draw(){ // how to play
     background(220)
     textSize(32);
     text('How To Play Single Player:', 0, 30);
